@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "783134854503",
+    "project_id": "testing-cli-5848e",
+    "storage_bucket": "testing-cli-5848e.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:783134854503:android:4ecafbc0f153983bb773c2",
+        "android_client_info": {
+          "package_name": "com.techwa.android_setup_firebase"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC7Y9co_8dROogtAVLPoWsdzLz0F1OS5oc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -5,8 +5,8 @@ import 'package:get/get.dart';
 
 class SplashServices {
   void isLogin() {
-    Timer(Duration(seconds: 3), () {
-      Get.to(LoginScreen());
+    Timer(const Duration(seconds: 3), () {
+      Get.to(const LoginScreen());
     });
   }
 }

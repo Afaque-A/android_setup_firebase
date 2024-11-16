@@ -25,7 +25,7 @@ class _SplashScreenState extends State<SplashScreen> {
         title: const Text('splash_screen'),
         backgroundColor: Colors.teal,
       ),
-      body: Center(
+      body: const Center(
         child: Text(
           'splash screen',
           style: TextStyle(fontSize: 30, color: Colors.amber),

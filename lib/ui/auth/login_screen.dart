@@ -11,6 +11,8 @@ class LoginScreen extends StatefulWidget {
 
 class _LoginScreenState extends State<LoginScreen> {
   final _formKey = GlobalKey<FormState>();
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -38,7 +40,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 }
                 return null;
               },
-              controllar: TextEditingController(),
+              controllar: _emailController,
             ),
             5.heightBox,
             textfield(
@@ -53,7 +55,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 }
                 return null;
               },
-              controllar: TextEditingController(),
+              controllar: _passwordController,
             ),
             10.heightBox,
             Center(

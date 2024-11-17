@@ -48,7 +48,7 @@ class _LoginScreenState extends State<LoginScreen> {
               style: const TextStyle(color: Colors.black),
               hint: passHint,
               obscureText: true, // Email should not be obscured
-              icons: const Icon(Icons.password_outlined),
+              icons: const Icon(Icons.lock_outlined),
               validate: (value) {
                 if (value == null || value.isEmpty) {
                   return 'Please enter your password';

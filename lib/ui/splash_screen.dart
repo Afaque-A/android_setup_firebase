@@ -21,16 +21,24 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('splash_screen'),
-        backgroundColor: Colors.teal,
-      ),
-      body: const Center(
-        child: Text(
-          'splash screen',
-          style: TextStyle(fontSize: 30, color: Colors.amber),
+      appBar: PreferredSize(
+        preferredSize: const Size.fromHeight(60), // AppBar height
+        child: ClipRRect(
+          borderRadius: const BorderRadius.only(
+            topLeft: Radius.circular(20),
+            topRight: Radius.circular(20),
+          ),
+          child: AppBar(
+            backgroundColor: Colors.cyan,
+            automaticallyImplyLeading: false,
+            title: const Text('Welcome Back!'),
+          ),
         ),
       ),
+      body: const Center(
+          child: CircularProgressIndicator(
+        color: Colors.teal,
+      )),
     );
   }
 }

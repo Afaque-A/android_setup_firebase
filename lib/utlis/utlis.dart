@@ -2,11 +2,11 @@ import 'package:android_setup_firebase/const/constant.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
 class Utlis {
-  void fluttertoast() {
+  void toastMessage(String message) {
     Fluttertoast.showToast(
-        msg: "This is Center Short Toast",
+        msg: message,
         toastLength: Toast.LENGTH_SHORT,
-        gravity: ToastGravity.CENTER,
+        gravity: ToastGravity.BOTTOM,
         timeInSecForIosWeb: 1,
         backgroundColor: Colors.teal,
         textColor: Colors.white,

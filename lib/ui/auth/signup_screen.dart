@@ -2,6 +2,7 @@ import 'package:android_setup_firebase/components/login_buttons.dart';
 import 'package:android_setup_firebase/components/textformfield.dart';
 import 'package:android_setup_firebase/const/constant.dart';
 import 'package:android_setup_firebase/ui/auth/login_screen.dart';
+import 'package:android_setup_firebase/utlis/utlis.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
 
@@ -18,6 +19,7 @@ class _SignupScreenState extends State<SignupScreen> {
   final TextEditingController _passwordController = TextEditingController();
 
   FirebaseAuth _auth = FirebaseAuth.instance;
+  bool loading = false;
 
   @override
   Widget build(BuildContext context) {
@@ -80,9 +82,23 @@ class _SignupScreenState extends State<SignupScreen> {
                   FocusScope.of(context).unfocus();
 
                   if (_formKey.currentState!.validate()) {
-                    _auth.createUserWithEmailAndPassword(
-                        email: _emailController.text.toString(),
-                        password: _passwordController.text.toString());
+                    setState(() {
+                      loading = true;
+                    });
+                    _auth
+                        .createUserWithEmailAndPassword(
+                            email: _emailController.text.toString(),
+                            password: _passwordController.text.toString())
+                        .then((value) {
+                      setState(() {
+                        loading = false;
+                      });
+                    }).onError((error, StackTrace) {
+                      setState(() {
+                        loading = false;
+                      });
+                      Utlis().toastMessage(error.toString());
+                    });
                     print('Form is valid');
                     // Proceed with login logic
                   } else {

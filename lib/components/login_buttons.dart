@@ -1,6 +1,7 @@
 import 'package:android_setup_firebase/const/constant.dart';
 
 Widget loginButtons({
+  loading = false,
   color,
   String? title,
   onpress,
@@ -13,7 +14,11 @@ Widget loginButtons({
         backgroundColor: Colors.cyan,
       ),
       onPressed: onpress,
-      child: title!.text.color(textColor).size(15).make(),
+      child: loading
+          ? const CircularProgressIndicator(
+              color: Colors.white,
+            )
+          : title!.text.color(textColor).size(15).make(),
     ),
   );
 }

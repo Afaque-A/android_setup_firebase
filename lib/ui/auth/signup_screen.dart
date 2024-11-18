@@ -78,6 +78,7 @@ class _SignupScreenState extends State<SignupScreen> {
               child: loginButtons(
                 color: buttonColor,
                 title: 'SignUp',
+                loading: loading,
                 onpress: () {
                   FocusScope.of(context).unfocus();
 
@@ -94,10 +95,10 @@ class _SignupScreenState extends State<SignupScreen> {
                         loading = false;
                       });
                     }).onError((error, StackTrace) {
+                      Utlis().toastMessage(error.toString());
                       setState(() {
                         loading = false;
                       });
-                      Utlis().toastMessage(error.toString());
                     });
                     print('Form is valid');
                     // Proceed with login logic

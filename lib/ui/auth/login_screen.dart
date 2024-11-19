@@ -2,6 +2,7 @@ import 'package:android_setup_firebase/components/login_buttons.dart';
 import 'package:android_setup_firebase/components/textformfield.dart';
 import 'package:android_setup_firebase/const/constant.dart';
 import 'package:android_setup_firebase/ui/auth/signup_screen.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 import 'package:get/get.dart';
 
@@ -16,6 +17,8 @@ class _LoginScreenState extends State<LoginScreen> {
   final _formKey = GlobalKey<FormState>();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
+
+  final _auth = FirebaseAuth.instance;
 
   @override
   Widget build(BuildContext context) {
@@ -78,6 +81,9 @@ class _LoginScreenState extends State<LoginScreen> {
                   FocusScope.of(context).unfocus();
 
                   if (_formKey.currentState!.validate()) {
+                    _auth.createUserWithEmailAndPassword(
+                        email: _emailController.text.toString(),
+                        password: _passwordController.text.toString());
                     print('Form is valid');
                     // Proceed with login logic
                   } else {

@@ -2,6 +2,8 @@ import 'package:android_setup_firebase/components/login_buttons.dart';
 import 'package:android_setup_firebase/components/textformfield.dart';
 import 'package:android_setup_firebase/const/constant.dart';
 import 'package:android_setup_firebase/ui/auth/signup_screen.dart';
+import 'package:android_setup_firebase/ui/post/post_screen.dart';
+import 'package:android_setup_firebase/utlis/utlis.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 import 'package:get/get.dart';
@@ -19,6 +21,7 @@ class _LoginScreenState extends State<LoginScreen> {
   final TextEditingController _passwordController = TextEditingController();
 
   final _auth = FirebaseAuth.instance;
+  bool loading = false;
 
   @override
   Widget build(BuildContext context) {
@@ -77,13 +80,31 @@ class _LoginScreenState extends State<LoginScreen> {
               child: loginButtons(
                 color: buttonColor,
                 title: 'Login',
+                loading: loading,
                 onpress: () {
+                  Get.to(() => const PostScreen());
                   FocusScope.of(context).unfocus();
 
                   if (_formKey.currentState!.validate()) {
-                    _auth.createUserWithEmailAndPassword(
-                        email: _emailController.text.toString(),
-                        password: _passwordController.text.toString());
+                    setState(() {
+                      loading = true;
+                    });
+                    _auth
+                        .signInWithEmailAndPassword(
+                            email: _emailController.text.toString(),
+                            password: _passwordController.text.toString())
+                        .then((value) {
+                      Utlis().toastMessage(value.user!.email.toString());
+                      setState(() {
+                        loading = false;
+                      });
+                    }).onError((error, stackTrace) {
+                      debugPrint(error.toString());
+                      Utlis().toastMessage(error.toString());
+                      setState(() {
+                        loading = false;
+                      });
+                    });
                     print('Form is valid');
                     // Proceed with login logic
                   } else {

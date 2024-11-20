@@ -18,7 +18,7 @@ class _SignupScreenState extends State<SignupScreen> {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
 
-  FirebaseAuth _auth = FirebaseAuth.instance;
+  final FirebaseAuth _auth = FirebaseAuth.instance;
   bool loading = false;
 
   @override
@@ -116,7 +116,7 @@ class _SignupScreenState extends State<SignupScreen> {
                 const Text('already have an account?'),
                 TextButton(
                     onPressed: () {
-                      Get.to(const LoginScreen());
+                      Get.to(() => const LoginScreen());
                     },
                     child: const Text('Login'))
               ],

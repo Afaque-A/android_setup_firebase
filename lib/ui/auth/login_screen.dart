@@ -16,12 +16,12 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+  bool loading = false;
   final _formKey = GlobalKey<FormState>();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
 
   final _auth = FirebaseAuth.instance;
-  bool loading = false;
 
   @override
   Widget build(BuildContext context) {
@@ -60,7 +60,9 @@ class _LoginScreenState extends State<LoginScreen> {
               },
               controllar: _emailController,
             ),
-            5.heightBox,
+            const SizedBox(
+              height: 5,
+            ),
             textfield(
               title: 'Password',
               style: const TextStyle(color: Colors.black),
@@ -75,14 +77,15 @@ class _LoginScreenState extends State<LoginScreen> {
               },
               controllar: _passwordController,
             ),
-            10.heightBox,
+            const SizedBox(
+              height: 10,
+            ),
             Center(
               child: loginButtons(
                 color: buttonColor,
                 title: 'Login',
                 loading: loading,
                 onpress: () {
-                  Get.to(() => const PostScreen());
                   FocusScope.of(context).unfocus();
 
                   if (_formKey.currentState!.validate()) {
@@ -91,16 +94,19 @@ class _LoginScreenState extends State<LoginScreen> {
                     });
                     _auth
                         .signInWithEmailAndPassword(
-                            email: _emailController.text.toString(),
-                            password: _passwordController.text.toString())
+                            email: _emailController.text.trim(),
+                            password: _passwordController.text.trim())
                         .then((value) {
                       Utlis().toastMessage(value.user!.email.toString());
+
+                      Get.to(() => const PostScreen());
                       setState(() {
                         loading = false;
                       });
                     }).onError((error, stackTrace) {
                       debugPrint(error.toString());
                       Utlis().toastMessage(error.toString());
+
                       setState(() {
                         loading = false;
                       });
@@ -114,14 +120,16 @@ class _LoginScreenState extends State<LoginScreen> {
                 textColor: Colors.white,
               ),
             ),
-            5.heightBox,
+            const SizedBox(
+              height: 10,
+            ),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 const Text('Don’t have an account?'),
                 TextButton(
                   onPressed: () {
-                    Get.to(const SignupScreen());
+                    Get.to(() => const SignupScreen());
                   },
                   child: const Text('SignUp'),
                 )
